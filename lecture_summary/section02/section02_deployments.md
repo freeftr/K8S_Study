@@ -27,10 +27,10 @@ spec:
             containers:
             - name: nginx-controller
               image: nginx
-replicas: 3
-selector:
-    matchLabels:
-        type: front-end
+  replicas: 3
+  selector:
+      matchLabels:
+          type: front-end
 ~~~
 
 2. `kubectl create -f deployment-definition.yml` 실행
