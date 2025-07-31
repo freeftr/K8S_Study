@@ -17,12 +17,12 @@ Admission Controller는 인증 및 권한 부여 이후에 실행되는 플러�
 - 요청의 내용이 괜찮은가?
 
 ### 종류
-- NamespaceExists: 존재하지 않는 네임스페이스에 대한 요청 거절
-- NamespaceAutoProvision: 네임스페이스가 없으면 자동 생성
 - AlwaysPullImages: 항상 이미지 다시 풀
 - DefaultStorageClass: PVC에 기본 스토리지클래스 자동 지정
+  - default
 - EventRateLimit: API 요청 속도 제한
 - NamespaceLifecycle: 네임스페이스 생명 주기 제어
+  - default
 
 ### 명령어
 - `kube-apiserver -h | grep enable-admission-plugins`: 현재 활성화된 플러그인 확인
