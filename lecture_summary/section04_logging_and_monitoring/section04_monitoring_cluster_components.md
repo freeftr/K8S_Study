@@ -20,3 +20,5 @@
   - 디스크에 저장하지 않기 때문에 과거 이력은 볼수 없음.
 - 쿠버네티스는 각 노드에서 Kublet의 cAdvisor 컴포넌트를 통해 Pod의 메트릭들을 받아와서 Metric Server에 보낸다.
 
+### 명령어
+- `kubectl top node`: 노드 리소스 사용량 확인
