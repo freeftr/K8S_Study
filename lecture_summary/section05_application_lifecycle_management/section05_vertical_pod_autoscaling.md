@@ -42,4 +42,6 @@ spec:
   - `Recreate`: 기존 Pod 재생성
   - `Auto`: 현재는 Recreate In-place resizing 활성화 시 지원
 
-- `kubectl describe vpa my-app-vpa`: 추천값 확인하는 방법
+- `kubectl describe vpa my-app-vpa`: 추천값 확인하는 
+
+*만약 Pod가 1개인데 재생성해야 하는 상황이면 쿠버네티스가 다운 타임을 방지하기 위해 삭제를 막는다. 이럴때는 replica를 늘려줄 필요가 있다.
