@@ -16,7 +16,8 @@ HPA는 CPU, 메모리 또는 메트릭을 기준으로 Pod 개수를 자동으�
 - `kubectl get hpa`로 확인
 
 ### HPA - Declarative
-~~~apiVersion: autoscaling/v2
+~~~
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: my-app-hpa
