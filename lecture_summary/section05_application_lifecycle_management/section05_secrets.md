@@ -17,7 +17,7 @@ Secret은 비밀번호나 인증 키 같은 민감 정보를 저장하기 위한
 - 여러 개의 키-값을 넣고 싶으면 `--from-literal`을 여러 번 지정할 수 있음.
 
 ### 파일
-- `kubectl create secret generic app-secret --from-file=./my-secret.txt
+- `kubectl create secret generic app-secret --from-file=./my-secret.txt`
 
 ### Declarative  - definition
 ~~~
