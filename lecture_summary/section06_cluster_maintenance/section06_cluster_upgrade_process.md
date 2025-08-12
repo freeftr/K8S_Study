@@ -32,3 +32,73 @@
 
 ### 다운타임
 - 마스터 노드 업그레이드 시에는 워커 노드에는 영향이 없다. 관리만 안되는 것뿐.
+
+## 공식문서 활용법
+***
+
+## 📌 업그레이드 순서 (kubeadm 기준)
+**항상** Control Plane → Worker 순으로 진행.
+
+### 1. Control Plane 업그레이드
+1. **kubeadm 최신 버전 설치** (예: 1.29.3)
+   ```bash
+   apt-get update
+   apt-get install -y kubeadm=1.29.3-1.1
+   kubeadm version
+   ```
+2. **업그레이드 계획 확인**
+   ```bash
+   sudo kubeadm upgrade plan
+   ```
+    - 현재/목표 버전, 자동 업그레이드 가능 컴포넌트, 수동 업그레이드 필요 항목(kubelet) 확인.
+3. **Control Plane 구성요소 업그레이드**
+   ```bash
+   sudo kubeadm upgrade apply v1.29.3
+   ```
+    - API Server, Controller Manager, Scheduler 등 업그레이드.
+4. **kubelet 업그레이드 전 drain**
+   ```bash
+   kubectl drain <control-plane-node> --ignore-daemonsets
+   ```
+5. **kubelet / kubectl 업그레이드 & 재시작**
+   ```bash
+   apt-get install -y kubelet=1.29.3-1.1 kubectl=1.29.3-1.1
+   systemctl restart kubelet
+   ```
+6. **uncordon**
+   ```bash
+   kubectl uncordon <control-plane-node>
+   ```
+
+> 다중 Control Plane 환경이라면 각 노드마다 **`kubeadm upgrade node`** 후 kubelet 업그레이드 반복.
+
+---
+
+### 2. Worker 노드 업그레이드
+1. **kubeadm 업그레이드**
+   ```bash
+   apt-get install -y kubeadm=1.29.3-1.1
+   sudo kubeadm upgrade node
+   ```
+2. **drain**
+   ```bash
+   kubectl drain <worker-node> --ignore-daemonsets
+   ```
+3. **kubelet / kubectl 업그레이드 & 재시작**
+   ```bash
+   apt-get install -y kubelet=1.29.3-1.1 kubectl=1.29.3-1.1
+   systemctl restart kubelet
+   ```
+4. **uncordon**
+   ```bash
+   kubectl uncordon <worker-node>
+   ```
+5. 모든 워커 노드에 대해 1~4단계 반복.
+
+---
+
+## 📌 업그레이드 후 확인
+```bash
+kubectl get nodes
+```
+- 모든 노드의 VERSION이 목표 버전(예: 1.29.3)인지 확인.
