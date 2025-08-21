@@ -73,3 +73,4 @@ ENTRYPOINT FLASK_APP=/opt/source-code/app.py flask run
   - Btrfs
   - ZFS
 - OS에 따라 기본 드라이버 달라짐.
+- 볼륨 자체는 Volume Driver가 처리한다. 
